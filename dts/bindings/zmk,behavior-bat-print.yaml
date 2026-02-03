@@ -1,0 +1,7 @@
+description: Behavior that types the current battery percentage
+
+compatible: "zmk,behavior-bat-print"
+
+include: zero_param.yaml
+
+properties: {}

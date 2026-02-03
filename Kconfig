@@ -1,0 +1,6 @@
+config ZMK_BEHAVIOR_BAT_PRINT
+	bool "Bat print behavior: type battery percentage as digits"
+	default y
+	help
+	  When enabled, the &bat_print behavior types the current keyboard
+	  battery percentage (0-100) as digits into the focused application.

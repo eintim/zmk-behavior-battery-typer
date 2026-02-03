@@ -1,0 +1,8 @@
+/ {
+	behaviors {
+		/omit-if-no-ref/ bat_print: bat_print {
+			compatible = "zmk,behavior-bat-print";
+			#binding-cells = <0>;
+		};
+	};
+};

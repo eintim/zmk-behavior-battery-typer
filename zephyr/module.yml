@@ -1,11 +1,10 @@
 # Delete all unused properties.
 
 # Give your module a name
-name: zmk-module-template
+name: zmk-behavior-battery-typer
 build:
   # List your dependencies
-  depends:
-    - zmk-example-dependency
+  depends: []
   # Folder containing a "CMakeLists.txt" (. = root)
   cmake: .
   # Kconfig filepath
