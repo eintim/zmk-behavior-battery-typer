@@ -44,6 +44,19 @@ Bind it like a normal behavior:
 &bat_print
 ```
 
+The behavior requires battery reporting (`CONFIG_ZMK_BATTERY_REPORTING`), which is on by default for BLE keyboards.
+
+### Optional: Adjust typing speed
+
+Keys are typed through ZMK's behavior queue, the same mechanism macros use. If characters get dropped on your host, slow it down:
+
+```dts
+&bat_print {
+  tap-ms = <30>;   // how long each key is held (default 30)
+  wait-ms = <15>;  // pause after each key (default 15)
+};
+```
+
 ### 3. Optional: Bind to a combo
 
 ```dts
@@ -62,8 +75,8 @@ Bind it like a normal behavior:
 
 ## Split keyboards
 
-To type both sides (e.g. `87 92`), set in your config:
+To also type the peripheral halves (e.g. `87 92`), set in your config:
 
 `CONFIG_ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING=y`
 
-Otherwise only the central side is typed.
+Otherwise only the central side is typed. With multiple peripherals, each level is typed in order, separated by spaces. A peripheral that hasn't reported a level yet shows as `0`.

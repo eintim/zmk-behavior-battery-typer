@@ -4,4 +4,12 @@ compatible: "zmk,behavior-bat-print"
 
 include: zero_param.yaml
 
-properties: {}
+properties:
+  tap-ms:
+    type: int
+    default: 30
+    description: Time in milliseconds each digit key is held down
+  wait-ms:
+    type: int
+    default: 15
+    description: Time in milliseconds to wait after releasing a key before the next one
