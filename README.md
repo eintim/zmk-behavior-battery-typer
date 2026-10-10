@@ -24,11 +24,13 @@ manifest:
 
     - name: zmk-behavior-battery-typer
       remote: eintim
-      revision: main
+      revision: v1.0
 
   self:
     path: config
 ```
+
+`v1.0` always points to the latest `v1.0.x` release. Use `main` instead to follow development.
 
 ### 2. Include the behavior in your keymap
 
@@ -45,6 +47,8 @@ Bind it like a normal behavior:
 ```
 
 The behavior requires battery reporting (`CONFIG_ZMK_BATTERY_REPORTING`), which is on by default for BLE keyboards.
+
+Held modifiers are ignored while the digits are typed, so holding Shift won't turn `87` into `*&`.
 
 ### Optional: Adjust typing speed
 
@@ -83,4 +87,4 @@ To also type the peripheral halves (e.g. `87 92`), set in your config:
 
 `CONFIG_ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING=y`
 
-Otherwise only the central side is typed. With multiple peripherals, each level is typed in order, separated by spaces. A peripheral that hasn't reported a level yet shows as `0`.
+Otherwise only the central side is typed. With multiple peripherals, each level is typed in order, separated by spaces. A disconnected peripheral shows as `-` (e.g. `87 -`).
