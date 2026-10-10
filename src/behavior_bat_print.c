@@ -81,6 +81,9 @@ static int on_bat_print_binding_released(struct zmk_behavior_binding *binding,
 static const struct behavior_driver_api behavior_bat_print_driver_api = {
 	.binding_pressed = on_bat_print_binding_pressed,
 	.binding_released = on_bat_print_binding_released,
+#if IS_ENABLED(CONFIG_ZMK_BEHAVIOR_METADATA)
+	.get_parameter_metadata = zmk_behavior_get_empty_param_metadata,
+#endif
 };
 
 #define BAT_PRINT_INST(n)                                                                          \

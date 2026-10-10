@@ -1,8 +1,14 @@
+#include <dt-bindings/zmk/behaviors.h>
+
 / {
 	behaviors {
-		/omit-if-no-ref/ bat_print: bat_print {
+#if ZMK_BEHAVIOR_OMIT(BAT_PRINT)
+		/omit-if-no-ref/
+#endif
+		bat_print: bat_print {
 			compatible = "zmk,behavior-bat-print";
 			#binding-cells = <0>;
+			display-name = "Battery Print";
 		};
 	};
 };

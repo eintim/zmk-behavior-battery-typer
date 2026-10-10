@@ -73,6 +73,10 @@ Keys are typed through ZMK's behavior queue, the same mechanism macros use. If c
 };
 ```
 
+## ZMK Studio
+
+The behavior shows up in [ZMK Studio](https://zmk.dev/docs/features/studio) as **Battery Print**. Studio builds keep it in the firmware even when your keymap doesn't reference it, as long as the keymap includes `behaviors/bat_print.dtsi`, so you can assign it to a key from Studio. To leave it out, define `ZMK_BEHAVIORS_OMIT_BAT_PRINT` before the include.
+
 ## Split keyboards
 
 To also type the peripheral halves (e.g. `87 92`), set in your config:

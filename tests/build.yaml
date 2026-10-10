@@ -3,3 +3,8 @@ include:
     shield: corne_left
   - board: nice_nano//zmk
     shield: corne_right
+  - board: nice_nano//zmk
+    shield: corne_left
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    artifact-name: corne_left-studio
