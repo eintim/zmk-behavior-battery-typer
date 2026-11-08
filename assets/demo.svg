@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="320" viewBox="0 0 800 320" role="img" aria-labelledby="title desc">
+  <title id="title">ZMK battery typer demo</title>
+  <desc id="desc">On a split keyboard, pressing the &amp;bat_print key types 87 92: the central half is at 87 percent and the peripheral half at 92.</desc>
+  <style>
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    .sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+    .step { animation-duration: 7s; animation-iteration-count: infinite; animation-timing-function: steps(1, end); }
+    .key { transform-box: fill-box; transform-origin: center; animation: press 7s ease-in-out infinite; }
+    @keyframes press {
+      0%, 7%, 15%, 100% { transform: scale(1); fill: #3fb950; }
+      8.6%, 13% { transform: scale(0.84); fill: #7ee787; }
+    }
+    .glow { opacity: 0; transform-box: fill-box; transform-origin: center; animation: ripple 7s ease-out infinite; }
+    @keyframes ripple {
+      0%, 8.4% { opacity: 0; transform: scale(0.9); }
+      8.6% { opacity: 1; transform: scale(0.9); }
+      18%, 100% { opacity: 0; transform: scale(1.45); }
+    }
+    .c1 { opacity: 0; animation-name: c1; }
+    @keyframes c1 { 0% { opacity: 0; } 17% { opacity: 1; } 88% { opacity: 0; } }
+    .c2, .ln { opacity: 0; animation-name: c2; }
+    @keyframes c2 { 0% { opacity: 0; } 19.5% { opacity: 1; } 88% { opacity: 0; } }
+    .c3 { opacity: 0; animation-name: c3; }
+    @keyframes c3 { 0% { opacity: 0; } 24.5% { opacity: 1; } 88% { opacity: 0; } }
+    .c4, .rn { opacity: 0; animation-name: c4; }
+    @keyframes c4 { 0% { opacity: 0; } 27% { opacity: 1; } 88% { opacity: 0; } }
+    .cursor { animation-name: move; }
+    @keyframes move { 0% { transform: translateX(0px); } 17% { transform: translateX(22px); } 19.5% { transform: translateX(44px); } 22% { transform: translateX(66px); } 24.5% { transform: translateX(88px); } 27% { transform: translateX(110px); } 88% { transform: translateX(0px); } }
+    .blink { animation: blink 1s steps(1, end) infinite; }
+    @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } }
+  </style>
+
+  <rect x="0.5" y="0.5" width="799" height="319" rx="16" fill="#0d1117" stroke="#30363d"/>
+
+  <!-- text field -->
+  <rect x="200" y="20" width="400" height="88" rx="10" fill="#161b22" stroke="#30363d"/>
+  <path d="M200 48 h400" stroke="#30363d"/>
+  <circle cx="218" cy="34" r="5" fill="#ff5f56"/>
+  <circle cx="235" cy="34" r="5" fill="#ffbd2e"/>
+  <circle cx="252" cy="34" r="5" fill="#27c93f"/>
+  <text class="sans" x="400" y="39" text-anchor="middle" font-size="14" fill="#7d8590">any text field</text>
+  <g class="mono" font-size="34" fill="#e6edf3">
+    <text class="c1 step" x="224" y="90">8</text>
+    <text class="c2 step" x="246" y="90">7</text>
+    <text class="c3 step" x="290" y="90">9</text>
+    <text class="c4 step" x="312" y="90">2</text>
+  </g>
+  <g class="cursor step"><rect class="blink" x="224" y="60" width="3" height="38" fill="#58a6ff"/></g>
+
+  <!-- where each number comes from -->
+  <g fill="none" stroke="#3fb950" stroke-width="1.5" stroke-dasharray="4 4">
+    <path class="ln step" d="M246 110 C 246 126, 162 112, 162 122"/>
+    <path class="rn step" d="M301 110 C 301 128, 638 108, 638 122"/>
+  </g>
+  <g class="mono" font-size="18" font-weight="700" text-anchor="middle">
+    <text class="ln step" x="162" y="140" fill="#7ee787">87</text>
+    <text class="rn step" x="638" y="140" fill="#7ee787">92</text>
+  </g>
+
+  <!-- keyboard halves -->
+  <g fill="#2d333b" stroke="#444c56">
+    <rect x="60" y="162" width="30" height="30" rx="6"/>
+    <rect x="60" y="196" width="30" height="30" rx="6"/>
+    <rect x="60" y="230" width="30" height="30" rx="6"/>
+    <rect x="94" y="156" width="30" height="30" rx="6"/>
+    <rect x="94" y="190" width="30" height="30" rx="6"/>
+    <rect x="94" y="224" width="30" height="30" rx="6"/>
+    <rect x="128" y="150" width="30" height="30" rx="6"/>
+    <rect x="128" y="184" width="30" height="30" rx="6"/>
+    <rect x="128" y="218" width="30" height="30" rx="6"/>
+    <rect x="162" y="146" width="30" height="30" rx="6"/>
+    <rect x="162" y="180" width="30" height="30" rx="6"/>
+    <rect x="162" y="214" width="30" height="30" rx="6"/>
+    <rect x="196" y="150" width="30" height="30" rx="6"/>
+    <rect x="196" y="184" width="30" height="30" rx="6"/>
+    <rect x="196" y="218" width="30" height="30" rx="6"/>
+    <rect x="230" y="154" width="30" height="30" rx="6"/>
+    <rect x="230" y="188" width="30" height="30" rx="6"/>
+    <rect x="230" y="222" width="30" height="30" rx="6"/>
+    <rect x="172" y="262" width="30" height="30" rx="6"/>
+    <rect x="206" y="265" width="30" height="30" rx="6"/>
+  </g>
+  <g fill="#2d333b" stroke="#444c56">
+    <rect x="710" y="162" width="30" height="30" rx="6"/>
+    <rect x="710" y="196" width="30" height="30" rx="6"/>
+    <rect x="710" y="230" width="30" height="30" rx="6"/>
+    <rect x="676" y="156" width="30" height="30" rx="6"/>
+    <rect x="676" y="190" width="30" height="30" rx="6"/>
+    <rect x="676" y="224" width="30" height="30" rx="6"/>
+    <rect x="642" y="150" width="30" height="30" rx="6"/>
+    <rect x="642" y="184" width="30" height="30" rx="6"/>
+    <rect x="642" y="218" width="30" height="30" rx="6"/>
+    <rect x="608" y="146" width="30" height="30" rx="6"/>
+    <rect x="608" y="180" width="30" height="30" rx="6"/>
+    <rect x="608" y="214" width="30" height="30" rx="6"/>
+    <rect x="574" y="150" width="30" height="30" rx="6"/>
+    <rect x="574" y="184" width="30" height="30" rx="6"/>
+    <rect x="574" y="218" width="30" height="30" rx="6"/>
+    <rect x="540" y="154" width="30" height="30" rx="6"/>
+    <rect x="540" y="188" width="30" height="30" rx="6"/>
+    <rect x="540" y="222" width="30" height="30" rx="6"/>
+    <rect x="598" y="262" width="30" height="30" rx="6"/>
+    <rect x="564" y="265" width="30" height="30" rx="6"/>
+    <rect x="530" y="268" width="30" height="30" rx="6"/>
+  </g>
+  <rect class="glow" x="240" y="268" width="30" height="30" rx="7" fill="none" stroke="#7ee787" stroke-width="2"/>
+  <rect class="key" x="240" y="268" width="30" height="30" rx="6" fill="#3fb950"/>
+  <text class="mono" x="284" y="289.0" font-size="15" fill="#7ee787">&#8592; &amp;bat_print</text>
+  <text class="sans" x="110" y="296" text-anchor="middle" font-size="15" fill="#7d8590">central</text>
+  <text class="sans" x="690" y="296" text-anchor="middle" font-size="15" fill="#7d8590">peripheral</text>
+</svg>
