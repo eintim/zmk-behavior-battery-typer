@@ -1,12 +1,21 @@
-# ZMK Battery Percentage Typing Behavior
+# ZMK Battery Typer
 
-Types the keyboard battery percentage as digits when triggered (e.g. `87` or `100`). Digits only.
+[![Build](https://github.com/eintim/zmk-behavior-battery-typer/actions/workflows/build.yml/badge.svg)](https://github.com/eintim/zmk-behavior-battery-typer/actions/workflows/build.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+Check the battery level of your wireless ZMK keyboard with one key. This [ZMK firmware](https://zmk.dev) module adds the `&bat_print` behavior. Press the key and the keyboard types its battery percentage into the focused text field. On a split keyboard such as a Corne, Sofle, Lily58 or Kyria, it types the level of each half.
+
+![Pressing the &bat_print key on a split keyboard types "87 92", the battery levels of the central and peripheral halves.](assets/demo.svg)
+
+## Why
+
+Most wireless ZMK keyboards have no display. Many operating systems show one battery level for a split keyboard, or none at all. This behavior works without a display or host software. Open any text field and press the key.
 
 ## Installation
 
-### 1. Add as a ZMK module
+### 1. Add the module
 
-In your **zmk-config** repo, edit `config/west.yml`:
+In your zmk-config repo, edit `config/west.yml`:
 
 ```yaml
 manifest:
@@ -30,38 +39,41 @@ manifest:
     path: config
 ```
 
-`v1.0` always points to the latest `v1.0.x` release. Use `main` instead to follow development.
+The `v1.0` tag points to the latest `v1.0.x` release. To follow development, use `main` instead.
 
-### 2. Include the behavior in your keymap
+### 2. Add the behavior to your keymap
 
-At the top of your keymap file:
+At the top of your keymap file, add:
 
 ```dts
 #include <behaviors/bat_print.dtsi>
 ```
 
-Bind it like a normal behavior:
+Then bind it to a key like any other behavior:
 
 ```dts
 &bat_print
 ```
 
-The behavior requires battery reporting (`CONFIG_ZMK_BATTERY_REPORTING`), which is on by default for BLE keyboards.
+The behavior needs battery reporting (`CONFIG_ZMK_BATTERY_REPORTING`). BLE keyboards have it on by default.
 
-Held modifiers are ignored while the digits are typed, so holding Shift won't turn `87` into `*&`.
+The behavior ignores held modifiers while it types, so holding Shift does not turn `87` into `*&`.
 
-### Optional: Adjust typing speed
+## Split keyboards
 
-Keys are typed through ZMK's behavior queue, the same mechanism macros use. If characters get dropped on your host, slow it down:
+To type the levels of the peripheral halves too, add this line to your config:
 
-```dts
-&bat_print {
-  tap-ms = <30>;   // how long each key is held (default 30)
-  wait-ms = <15>;  // pause after each key (default 15)
-};
-```
+`CONFIG_ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING=y`
 
-### 3. Optional: Bind to a combo
+Without it, the behavior types only the central half. With more than one peripheral, it types each level in order, separated by spaces. A disconnected peripheral shows as `-`, for example `87 -`.
+
+## ZMK Studio
+
+In [ZMK Studio](https://zmk.dev/docs/features/studio), the behavior appears as **Battery Print**. Studio builds keep it in the firmware when your keymap includes `behaviors/bat_print.dtsi`, even if no key uses it. This lets you assign it to a key from Studio. To leave it out of the firmware, define `ZMK_BEHAVIORS_OMIT_BAT_PRINT` before the include.
+
+## Optional settings
+
+### Bind to a combo
 
 ```dts
 / {
@@ -77,14 +89,13 @@ Keys are typed through ZMK's behavior queue, the same mechanism macros use. If c
 };
 ```
 
-## ZMK Studio
+### Adjust typing speed
 
-The behavior shows up in [ZMK Studio](https://zmk.dev/docs/features/studio) as **Battery Print**. Studio builds keep it in the firmware even when your keymap doesn't reference it, as long as the keymap includes `behaviors/bat_print.dtsi`, so you can assign it to a key from Studio. To leave it out, define `ZMK_BEHAVIORS_OMIT_BAT_PRINT` before the include.
+The behavior sends keys through ZMK's behavior queue, the same way macros do. If your host drops characters, slow it down:
 
-## Split keyboards
-
-To also type the peripheral halves (e.g. `87 92`), set in your config:
-
-`CONFIG_ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING=y`
-
-Otherwise only the central side is typed. With multiple peripherals, each level is typed in order, separated by spaces. A disconnected peripheral shows as `-` (e.g. `87 -`).
+```dts
+&bat_print {
+  tap-ms = <30>;   // how long each key is held (default 30)
+  wait-ms = <15>;  // pause after each key (default 15)
+};
+```
